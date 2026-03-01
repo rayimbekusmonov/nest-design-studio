@@ -16,9 +16,7 @@ export function StatCounter({ end, label, suffix = '', index }: StatCounterProps
   const displayValue = useMotionValue(0);
 
   useEffect(() => {
-    if (isInView) {
-      motionValue.set(end);
-    }
+    if (isInView) motionValue.set(end);
   }, [isInView, end, motionValue]);
 
   useEffect(() => {
@@ -29,24 +27,17 @@ export function StatCounter({ end, label, suffix = '', index }: StatCounterProps
   }, [springValue, displayValue]);
 
   return (
-    <motion.div
-      ref={ref}
+    <motion.div ref={ref}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className="text-center"
     >
-      <motion.div
-        className="text-5xl md:text-6xl mb-3 text-gold"
-        style={{ fontFamily: 'var(--font-heading)' }}
-      >
-        <motion.span>{displayValue}</motion.span>
-        {suffix}
+      <motion.div className="text-5xl md:text-6xl mb-3 text-gold" style={{ fontFamily: 'var(--font-heading)' }}>
+        <motion.span>{displayValue}</motion.span>{suffix}
       </motion.div>
-      <div className="text-off-white text-sm tracking-wider uppercase">
-        {label}
-      </div>
+      <div className="text-off-white text-sm tracking-wider uppercase">{label}</div>
     </motion.div>
   );
 }
