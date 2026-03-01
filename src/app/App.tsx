@@ -472,7 +472,7 @@ export default function App() {
           </div>
 
           <div className="border-t border-gold/20 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2025 Nest Design Co. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2026 Nest Design Co. Barcha huquqlar himoyalangan.</p>
           </div>
         </div>
       </footer>
