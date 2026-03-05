@@ -280,7 +280,7 @@ export default function App() {
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative">
               <div className="absolute -top-8 -left-8 w-full h-full border-2 border-gold/30 rounded-lg" />
               <img
-                src="https://media.cntraveller.com/photos/611bebfb6ab96bf3ecf1f25b/master/w_2048%2Cc_limit/2red.jpg"
+                src="https://i.pinimg.com/736x/3b/85/f4/3b85f44f9611a7a9309f2b5ed38e50be.jpg"
                 alt="NESTCO Jamoasi"
                 className="relative rounded-lg w-full h-[600px] object-cover"
               />
