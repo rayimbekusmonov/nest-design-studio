@@ -14,40 +14,64 @@ import { StatCounter } from './components/StatCounter';
 export default function App() {
   const projects = [
     {
-      image: 'https://images.unsplash.com/photo-1768223933860-6d62bc5b2ff3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsdXh1cnklMjBhcmNoaXRlY3R1cmUlMjBidWlsZGluZyUyMGV4dGVyaW9yfGVufDF8fHx8MTc3MjMxMjcwNHww&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Zamonaviy Turar-joy Majmuasi',
+      image: '/projects/exterior-5.jpg',
+      title: 'Klassik Villa',
       category: 'Eksteryer',
-      description: 'Zamonaviy me\'moriy elementlarni o\'zida mujassam etgan hashamatli turar-joy majmuasi.'
+      description: 'Favvora va landshaft bog\' bilan bezatilgan ikki qavatli klassik uslubdagi hashamatli villa.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1760888625668-8f9690b6759f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb250ZW1wb3JhcnklMjByZXNpZGVudGlhbCUyMGFyY2hpdGVjdHVyZSUyMHZpbGxhfGVufDF8fHx8MTc3MjMxMjcwNHww&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Vista Villa',
-      category: 'Eksteryer',
-      description: 'Minimalist estetika va funksional yashash makonlarini birlashtirgan zamonaviy villa dizayni.'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1669387448840-610c588f003d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBpbnRlcmlvciUyMGRlc2lnbiUyMGxpdmluZyUyMHJvb218ZW58MXx8fHwxNzcyMjI4Njk0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Hashamatli Interyer',
+      image: '/projects/interior-1.jpg',
+      title: 'Yotoqxona — Yashil Lustro',
       category: 'Interyer',
-      description: 'Zamonaviy materiallar va bezovta qilmaydigan nafislik uyg\'unligida yaratilgan premium interyer.'
+      description: 'Yashil kristall lusrto va oltin aksentlar bilan bezatilgan premium yotoqxona interyeri.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1758435260100-0c7be32a97bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwbGFuZHNjYXBlJTIwbW9kZXJuJTIwZ2FyZGVufGVufDF8fHx8MTc3MjMxMjcwNXww&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Bog\' Oazisi',
-      category: 'Landshaft',
-      description: 'Tabiiy muhit va zamonaviy arxitekturani uyg\'unlashtirgan tinch tashqi makon dizayni.'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1580742432710-d3c3703559a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tZXJjaWFsJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmUlMjBnbGFzc3xlbnwxfHx8fDE3NzIyMjc0MDR8MA&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Biznes Markaz',
+      image: '/projects/exterior-3.png',
+      title: 'Neoklassik Kottej',
       category: 'Eksteryer',
-      description: 'Innovatsion konstruktiv dizayn va shisha fasadlarni namoyish etuvchi ikonik tijoriy bino.'
+      description: 'Korinfiya ustunlari va temir panjara balkoni bilan bezatilgan kechki yorug\'likdagi villa fasadi.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1643200087394-535b34a66ad5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwYXJjaGl0ZWN0dXJlJTIwaG91c2UlMjBkZXNpZ258ZW58MXx8fHwxNzcyMzEyNzA2fDA&ixlib=rb-4.1.0&q=80&w=1080',
-      title: 'Minimalist Uy',
-      category: 'Konsept',
-      description: 'Toza chiziqlar va geometrik mukammallikni ta\'kidlovchi sof minimalist arxitektura.'
+      image: '/projects/interior-3.jpg',
+      title: 'Zamonaviy Yotoqxona',
+      category: 'Interyer',
+      description: 'Marmar lustro va yog\'och panel dekorli zamonaviy minimalist yotoqxona dizayni.'
+    },
+    {
+      image: '/projects/exterior-2.png',
+      title: 'Hashamatli Uy Fasadi',
+      category: 'Eksteryer',
+      description: 'Kechki yoritish va neoklassik arxitektura elementlari bilan bezatilgan turar-joy binosi.'
+    },
+    {
+      image: '/projects/interior-2.jpg',
+      title: 'Yotoqxona — TV Zona',
+      category: 'Interyer',
+      description: 'Klassik gips bezaklar va zamonaviy mebel uyg\'unligidagi hashamatli yotoqxona TV burchagi.'
+    },
+    {
+      image: '/projects/exterior-4.png',
+      title: 'Villa — Aerial Ko\'rinish',
+      category: 'Eksteryer',
+      description: 'Yuqoridan ko\'rinish: qora shifer tom va oq fasadli neoklassik uslubdagi kottej.'
+    },
+    {
+      image: '/projects/interior-4.jpg',
+      title: 'Kiyinish Xonasi',
+      category: 'Interyer',
+      description: 'Shisha kupe shkaf va chiziqli yoritish bilan yaratilgan zamonaviy walk-in closet dizayni.'
+    },
+    {
+      image: '/projects/exterior-1.jpg',
+      title: 'Klassik Villa Fasadi',
+      category: 'Eksteryer',
+      description: 'Arkali kirish va balkon panjuralari bilan bezatilgan oq rangli neoklassik villa.'
+    },
+    {
+      image: '/projects/interior-5.jpg',
+      title: 'Mehmonxona Burchagi',
+      category: 'Interyer',
+      description: 'Oltin aksent panel va gul bezagi bilan yaratilgan qulay o\'tirish burchagi dizayni.'
     },
   ];
 
