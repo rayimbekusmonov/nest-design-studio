@@ -118,7 +118,7 @@ export default function App() {
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1755963969542-532056290459?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjByZW5kZXIlMjBuaWdodHxlbnwxfHx8fDE3NzIzMTI3MDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            src="https://i.pinimg.com/1200x/83/26/0d/83260dcf87427c3d3748857f619be1c4.jpg"
             alt="Arxitektura"
             className="w-full h-full object-cover"
           />
