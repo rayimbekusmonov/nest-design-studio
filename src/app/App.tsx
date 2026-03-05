@@ -15,61 +15,61 @@ export default function App() {
   const projects = [
     {
       image: '/projects/exterior-5.jpg',
-      title: 'Klassik Villa',
+      title: 'Klassik villa',
       category: 'Eksteryer',
       description: 'Favvora va landshaft bog\' bilan bezatilgan ikki qavatli klassik uslubdagi hashamatli villa.'
     },
     {
       image: '/projects/interior-1.jpg',
-      title: 'Yotoqxona — Yashil Lustro',
+      title: 'Yotoqxona — yashil lustra',
       category: 'Interyer',
       description: 'Yashil kristall lusrto va oltin aksentlar bilan bezatilgan premium yotoqxona interyeri.'
     },
     {
       image: '/projects/exterior-3.png',
-      title: 'Neoklassik Kottej',
+      title: 'Neoklassik kottej',
       category: 'Eksteryer',
       description: 'Korinfiya ustunlari va temir panjara balkoni bilan bezatilgan kechki yorug\'likdagi villa fasadi.'
     },
     {
       image: '/projects/interior-3.jpg',
-      title: 'Zamonaviy Yotoqxona',
+      title: 'Zamonaviy yotoqxona',
       category: 'Interyer',
       description: 'Marmar lustro va yog\'och panel dekorli zamonaviy minimalist yotoqxona dizayni.'
     },
     {
       image: '/projects/exterior-2.png',
-      title: 'Hashamatli Uy Fasadi',
+      title: 'Hashamatli uy fasadi',
       category: 'Eksteryer',
       description: 'Kechki yoritish va neoklassik arxitektura elementlari bilan bezatilgan turar-joy binosi.'
     },
     {
       image: '/projects/interior-2.jpg',
-      title: 'Yotoqxona — TV Zona',
+      title: 'Yotoqxona — TV zona',
       category: 'Interyer',
       description: 'Klassik gips bezaklar va zamonaviy mebel uyg\'unligidagi hashamatli yotoqxona TV burchagi.'
     },
     {
       image: '/projects/exterior-4.png',
-      title: 'Villa — Aerial Ko\'rinish',
+      title: 'Villa — aerial ko\'rinish',
       category: 'Eksteryer',
       description: 'Yuqoridan ko\'rinish: qora shifer tom va oq fasadli neoklassik uslubdagi kottej.'
     },
     {
       image: '/projects/interior-4.jpg',
-      title: 'Kiyinish Xonasi',
+      title: 'Kiyinish xonasi',
       category: 'Interyer',
       description: 'Shisha kupe shkaf va chiziqli yoritish bilan yaratilgan zamonaviy walk-in closet dizayni.'
     },
     {
       image: '/projects/exterior-1.jpg',
-      title: 'Klassik Villa Fasadi',
+      title: 'Klassik villa fasadi',
       category: 'Eksteryer',
       description: 'Arkali kirish va balkon panjuralari bilan bezatilgan oq rangli neoklassik villa.'
     },
     {
       image: '/projects/interior-5.jpg',
-      title: 'Mehmonxona Burchagi',
+      title: 'Mehmonxona burchagi',
       category: 'Interyer',
       description: 'Oltin aksent panel va gul bezagi bilan yaratilgan qulay o\'tirish burchagi dizayni.'
     },
@@ -78,27 +78,27 @@ export default function App() {
   const services = [
     {
       icon: Building2,
-      title: 'Arxitektura Loyihalash',
+      title: 'Arxitektura loyihalash',
       description: 'Kontseptsiyadan tugatishgacha bo\'lgan har tomonlama arxitektura yechimlari — aniqlik va ijodkorlik bilan ishlab chiqiladi.'
     },
     {
       icon: Home,
-      title: 'Interyer Dizayn',
+      title: 'Interyer dizayn',
       description: 'Nafislik, funksionallik va sizning o\'ziga xos tasavvuringizni aks ettiruvchi hashamatli ichki makonlar.'
     },
     {
       icon: PenTool,
-      title: 'Eksteryer Dizayn',
+      title: 'Eksteryer dizayn',
       description: 'Kuchli taassurot qoldiradigan va vaqt sinovidan o\'tadigan ajoyib tashqi fasad dizayni.'
     },
     {
       icon: Trees,
-      title: 'Landshaft Dizayn',
+      title: 'Landshaft dizayn',
       description: 'Tabiatni zamonaviy qurilgan muhit bilan uyg\'unlashtiruvchi uyg\'un landshaft arxitekturasi.'
     },
     {
       icon: Lightbulb,
-      title: 'Konsept Loyihalar',
+      title: 'Konsept loyihalar',
       description: 'G\'oyadan haqiqatga — innovatsion konsept loyihalar orqali kelajak me\'morchiligini bugun yaratamiz.'
     },
   ];
@@ -140,10 +140,10 @@ export default function App() {
               Nest Design Co — Toshkent, O'zbekiston
             </motion.p>
             <h1 className="text-6xl md:text-8xl mb-6 text-off-white leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-              Me'morchilik
+              ARXITEKTURA
               <br />
               <span className="relative inline-block">
-                Yangi Darajada
+                YANGI DARAJADA
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: '100%' }}
@@ -167,7 +167,7 @@ export default function App() {
               className="flex gap-4 justify-center flex-wrap"
             >
               <Button variant="primary" icon={ArrowRight} onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
-                Loyihalarni Ko'rish
+                Loyihalarni ko'rish
               </Button>
               <Button variant="outline" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
                 Bog'lanish
@@ -218,7 +218,7 @@ export default function App() {
               <span className="text-gold text-sm tracking-widest uppercase">Portfolio</span>
             </div>
             <h2 className="text-5xl md:text-6xl text-off-white mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-              Tanlangan Loyihalar
+              Tanlangan loyihalar
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl">
               Amalga oshirilgan eng yaxshi me'moriy asarlarimiz bilan tanishing
@@ -259,7 +259,7 @@ export default function App() {
               <div className="w-12 h-0.5 bg-gold" />
             </div>
             <h2 className="text-5xl md:text-6xl text-off-white mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-              Bizning Xizmatlar
+              Bizning xizmatlar
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Sizning tasavvuringizga moslashtirilgan kompleks me'moriy yechimlar
@@ -289,10 +289,10 @@ export default function App() {
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-0.5 bg-gold" />
-                <span className="text-gold text-sm tracking-widest uppercase">Biz Haqimizda</span>
+                <span className="text-gold text-sm tracking-widest uppercase">Biz haqimizda</span>
               </div>
               <h2 className="text-5xl md:text-6xl text-off-white mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-                2020 Yildan Buyon Orzu Quramiz
+                2020-yildan buyon orzu quramiz
               </h2>
               <div className="w-24 h-1 bg-gold mb-8" />
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -321,7 +321,7 @@ export default function App() {
               </div>
 
               <Button variant="primary" icon={ArrowRight} onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-                Loyiha Boshlash
+                Loyiha boshlash
               </Button>
             </motion.div>
           </div>
@@ -338,7 +338,7 @@ export default function App() {
               <div className="w-12 h-0.5 bg-gold" />
             </div>
             <h2 className="text-5xl md:text-6xl text-off-white mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-              Biz Bilan Bog'laning
+              Biz bilan bog'laning
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Keyingi me'moriy asaringizni birga yarataylik
@@ -368,7 +368,7 @@ export default function App() {
                   className="inline-flex items-center gap-3 bg-gold text-charcoal px-10 py-5 text-base font-semibold tracking-wider transition-all duration-300 hover:bg-gold-dark"
                 >
                   <Send size={20} />
-                  Telegramda Yozish
+                  Telegramda yozish
                 </motion.a>
               </div>
 
@@ -402,8 +402,8 @@ export default function App() {
               <div className="bg-charcoal p-8 rounded-lg border border-gold/20">
                 <Mail className="text-gold mb-4" size={32} />
                 <h3 className="text-2xl mb-2 text-off-white" style={{ fontFamily: 'var(--font-heading)' }}>Email</h3>
-                <a href="mailto:xusravbekmehmonov@gmail.com" className="text-muted-foreground hover:text-gold transition-colors text-lg">
-                  xusravbekmehmonov@gmail.com
+                <a href="mailto:husravbekmehmonov@gmail.com" className="text-muted-foreground hover:text-gold transition-colors text-lg">
+                  husravbekmehmonov@gmail.com
                 </a>
               </div>
 
@@ -419,7 +419,7 @@ export default function App() {
 
               {/* Social Media */}
               <div className="bg-charcoal p-8 rounded-lg border border-gold/20">
-                <h3 className="text-2xl mb-4 text-off-white" style={{ fontFamily: 'var(--font-heading)' }}>Ijtimoiy Tarmoqlar</h3>
+                <h3 className="text-2xl mb-4 text-off-white" style={{ fontFamily: 'var(--font-heading)' }}>Ijtimoiy tarmoqlar</h3>
                 <div className="flex gap-4">
                   <motion.a href="https://instagram.com/nest.design.co" target="_blank" rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
@@ -427,11 +427,11 @@ export default function App() {
                     <Instagram size={20} />
                     <span className="text-sm">nest.design.co</span>
                   </motion.a>
-                  <motion.a href="https://t.me/xusrave" target="_blank" rel="noopener noreferrer"
+                  <motion.a href="https://t.me/husrave" target="_blank" rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     className="flex items-center gap-3 px-5 py-3 border border-gold/30 rounded-full text-muted-foreground hover:border-gold hover:text-gold transition-all duration-300">
                     <Send size={20} />
-                    <span className="text-sm">@xusrave</span>
+                    <span className="text-sm">@husrave</span>
                   </motion.a>
                 </div>
               </div>
@@ -467,13 +467,13 @@ export default function App() {
             </div>
 
             <div>
-              <h4 className="text-off-white mb-4 tracking-wide" style={{ fontFamily: 'var(--font-heading)' }}>Tezkor Havolalar</h4>
+              <h4 className="text-off-white mb-4 tracking-wide" style={{ fontFamily: 'var(--font-heading)' }}>Tezkor havolalar</h4>
               <ul className="space-y-2">
                 {[
-                  { label: 'Bosh Sahifa', id: 'hero' },
+                  { label: 'Bosh sahifa', id: 'hero' },
                   { label: 'Loyihalar', id: 'projects' },
                   { label: 'Xizmatlar', id: 'services' },
-                  { label: 'Biz Haqimizda', id: 'about' },
+                  { label: 'Biz haqimizda', id: 'about' },
                   { label: 'Aloqa', id: 'contact' },
                 ].map((link) => (
                   <li key={link.id}>
@@ -490,7 +490,7 @@ export default function App() {
               <h4 className="text-off-white mb-4 tracking-wide" style={{ fontFamily: 'var(--font-heading)' }}>Aloqa</h4>
               <div className="space-y-3 text-muted-foreground">
                 <p className="flex items-center gap-2"><Phone size={16} className="text-gold" /> +998 90 606 19 03</p>
-                <p className="flex items-center gap-2"><Mail size={16} className="text-gold" /> xusravbekmehmonov@gmail.com</p>
+                <p className="flex items-center gap-2"><Mail size={16} className="text-gold" /> husravbekmehmonov@gmail.com</p>
                 <p className="flex items-start gap-2"><MapPin size={16} className="text-gold mt-1 shrink-0" /> Maxtumquli ko'chasi 114A, Toshkent</p>
               </div>
               <div className="flex gap-3 mt-4">
@@ -507,7 +507,7 @@ export default function App() {
           </div>
 
           <div className="border-t border-gold/20 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2025 Nest Design Co. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2026 Nest Design Co. Barcha huquqlar himoyalangan.</p>
           </div>
         </div>
       </footer>
