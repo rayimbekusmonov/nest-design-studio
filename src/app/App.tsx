@@ -86,11 +86,6 @@ export default function App() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Xabaringiz uchun rahmat! Tez orada siz bilan bog\'lanamiz.');
-  };
-
   return (
     <div className="min-h-screen bg-charcoal text-off-white">
       <Navigation />
@@ -327,31 +322,47 @@ export default function App() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-16">
-            {/* Contact Form */}
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-off-white mb-2 tracking-wide">Ismingiz</label>
-                  <input type="text" required
-                    className="w-full bg-charcoal border border-gold/30 rounded-sm px-6 py-4 text-off-white focus:border-gold focus:outline-none transition-colors"
-                    placeholder="To'liq ismingiz" />
+            {/* Telegram CTA */}
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              className="flex flex-col justify-center">
+              <div className="mb-8">
+                <div className="w-20 h-20 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mb-6">
+                  <Send size={36} className="text-gold" />
                 </div>
-                <div>
-                  <label className="block text-off-white mb-2 tracking-wide">Telefon</label>
-                  <input type="tel" required
-                    className="w-full bg-charcoal border border-gold/30 rounded-sm px-6 py-4 text-off-white focus:border-gold focus:outline-none transition-colors"
-                    placeholder="+998 XX XXX XX XX" />
+                <h3 className="text-3xl md:text-4xl text-off-white mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
+                  Telegram orqali<br />bog'laning
+                </h3>
+                <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+                  Loyihangiz haqida gaplashishga tayyormiz. Telegramda yozing — tez javob beramiz va bepul konsultatsiya o'tkazamiz.
+                </p>
+                <motion.a
+                  href="https://t.me/xusrave"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03, boxShadow: '0 0 40px rgba(201,168,76,0.25)' }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-3 bg-gold text-charcoal px-10 py-5 text-base font-semibold tracking-wider transition-all duration-300 hover:bg-gold-dark"
+                >
+                  <Send size={20} />
+                  Telegramda Yozish
+                </motion.a>
+              </div>
+
+              {/* Quick info */}
+              <div className="border-t border-gold/20 pt-8 space-y-4">
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                  <span className="text-sm">Odatda 1 soat ichida javob beramiz</span>
                 </div>
-                <div>
-                  <label className="block text-off-white mb-2 tracking-wide">Xabar</label>
-                  <textarea required rows={6}
-                    className="w-full bg-charcoal border border-gold/30 rounded-sm px-6 py-4 text-off-white focus:border-gold focus:outline-none transition-colors resize-none"
-                    placeholder="Loyihangiz haqida gapirib bering..." />
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <div className="w-2 h-2 rounded-full bg-gold/60" />
+                  <span className="text-sm">Birinchi konsultatsiya — bepul</span>
                 </div>
-                <Button variant="primary" type="submit" className="w-full">
-                  Xabar Yuborish
-                </Button>
-              </form>
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <div className="w-2 h-2 rounded-full bg-gold/60" />
+                  <span className="text-sm">Har qanday hajmdagi loyihalar</span>
+                </div>
+              </div>
             </motion.div>
 
             {/* Contact Info */}
@@ -472,7 +483,7 @@ export default function App() {
           </div>
 
           <div className="border-t border-gold/20 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2026 Nest Design Co. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2025 Nest Design Co. Barcha huquqlar himoyalangan.</p>
           </div>
         </div>
       </footer>
