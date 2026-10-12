@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { motion } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowRight, Building2, Home, Trees, PenTool, Lightbulb,
   Phone, Mail, MapPin, Award, Users, Briefcase,
-  ChevronLeft, ChevronRight, Instagram, Send
+  Instagram, Send, X, ExternalLink
 } from 'lucide-react';
 import { Navigation } from './components/Navigation';
 import { Button } from './components/Button';
@@ -23,6 +23,13 @@ const FONT_DISP = 'var(--font-display)';
 const FONT_HEAD = 'var(--font-heading)';
 const FONT_BODY = 'var(--font-body)';
 
+interface Project {
+  image: string;
+  title: string;
+  category: string;
+  description: string;
+}
+
 /* ─── Section label / overline helper ─── */
 function SectionLabel({ text, center = false }: { text: string; center?: boolean }) {
   return (
@@ -40,18 +47,35 @@ function SectionLabel({ text, center = false }: { text: string; center?: boolean
 
 export default function App() {
   const [activeFilter, setActiveFilter] = useState<'all' | 'Interyer' | 'Eksteryer'>('all');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
 
-  const projects = [
-    { image: '/projects/exterior-5.jpg',  title: 'Klassik villa',          category: 'Eksteryer', description: 'Favvora va landshaft bog\' bilan bezatilgan ikki qavatli klassik uslubdagi hashamatli villa.' },
-    { image: '/projects/interior-1.jpg',  title: 'Yotoqxona — Yashil Lustra', category: 'Interyer',  description: 'Yashil kristall lusrto va oltin aksentlar bilan bezatilgan premium yotoqxona interyeri.' },
-    { image: '/projects/exterior-3.png',  title: 'Neoklassik kottej',      category: 'Eksteryer', description: 'Korinfiya ustunlari va temir panjara balkoni bilan bezatilgan kechki yorug\'likdagi villa fasadi.' },
-    { image: '/projects/interior-3.jpg',  title: 'Zamonaviy yotoqxona',    category: 'Interyer',  description: 'Marmar lustro va yog\'och panel dekorli zamonaviy minimalist yotoqxona dizayni.' },
-    { image: '/projects/exterior-2.png',  title: 'Hashamatli uy fasadi',   category: 'Eksteryer', description: 'Kechki yoritish va neoklassik arxitektura elementlari bilan bezatilgan turar-joy binosi.' },
-    { image: '/projects/interior-2.jpg',  title: 'Yotoqxona — TV zona',    category: 'Interyer',  description: 'Klassik gips bezaklar va zamonaviy mebel uyg\'unligidagi hashamatli yotoqxona TV burchagi.' },
+  /* Subtle ambient cursor glow */
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  /* Lock body scroll when modal is open */
+  useEffect(() => {
+    document.body.style.overflow = selectedProject ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [selectedProject]);
+
+  const projects: Project[] = [
+    { image: '/projects/exterior-5.jpg',  title: 'Klassik villa',             category: 'Eksteryer', description: 'Favvora va landshaft bog\' bilan bezatilgan ikki qavatli klassik uslubdagi hashamatli villa.' },
+    { image: '/projects/interior-1.jpg',  title: 'Yotoqxona — Yashil Lustra', category: 'Interyer',  description: 'Yashil kristall lustro va nafis detallar bilan bezatilgan premium yotoqxona interyeri.' },
+    { image: '/projects/exterior-3.png',  title: 'Neoklassik kottej',         category: 'Eksteryer', description: 'Korinfiya ustunlari va temir panjara balkoni bilan bezatilgan kechki yorug\'likdagi villa fasadi.' },
+    { image: '/projects/interior-3.jpg',  title: 'Zamonaviy yotoqxona',       category: 'Interyer',  description: 'Marmar tekstura va yog\'och panel dekorli zamonaviy minimalist yotoqxona dizayni.' },
+    { image: '/projects/exterior-2.png',  title: 'Hashamatli uy fasadi',      category: 'Eksteryer', description: 'Kechki yoritish va neoklassik arxitektura elementlari bilan bezatilgan turar-joy binosi.' },
+    { image: '/projects/interior-2.jpg',  title: 'Yotoqxona — TV zona',       category: 'Interyer',  description: 'Klassik gips bezaklar va zamonaviy mebel uyg\'unligidagi hashamatli yotoqxona TV burchagi.' },
     { image: '/projects/exterior-4.png',  title: 'Villa — Aerial Ko\'rinish', category: 'Eksteryer', description: 'Yuqoridan ko\'rinish: qora shifer tom va oq fasadli neoklassik uslubdagi kottej.' },
-    { image: '/projects/interior-4.jpg',  title: 'Kiyinish xonasi',        category: 'Interyer',  description: 'Shisha kupe shkaf va chiziqli yoritish bilan yaratilgan zamonaviy walk-in closet dizayni.' },
-    { image: '/projects/exterior-1.jpg',  title: 'Klassik villa fasadi',   category: 'Eksteryer', description: 'Arkali kirish va balkon panjuralari bilan bezatilgan oq rangli neoklassik villa.' },
-    { image: '/projects/interior-5.jpg',  title: 'Mehmonxona burchagi',    category: 'Interyer',  description: 'Oltin aksent panel va gul bezagi bilan yaratilgan qulay o\'tirish burchagi dizayni.' },
+    { image: '/projects/interior-4.jpg',  title: 'Kiyinish xonasi',           category: 'Interyer',  description: 'Shisha kupe shkaf va chiziqli yoritish bilan yaratilgan zamonaviy walk-in closet dizayni.' },
+    { image: '/projects/exterior-1.jpg',  title: 'Klassik villa fasadi',      category: 'Eksteryer', description: 'Arkali kirish va balkon panjuralari bilan bezatilgan oq rangli neoklassik villa.' },
+    { image: '/projects/interior-5.jpg',  title: 'Mehmonxona burchagi',       category: 'Interyer',  description: 'Aksent devor paneli va gul bezagi bilan yaratilgan qulay o\'tirish burchagi dizayni.' },
   ];
 
   const filteredProjects = activeFilter === 'all'
@@ -66,13 +90,28 @@ export default function App() {
     { icon: Lightbulb, title: 'Konsept loyihalar',      description: 'G\'oyadan haqiqatga — innovatsion konsept loyihalar orqali kelajak me\'morchiligini bugun yaratamiz.' },
   ];
 
-  const scrollProjects = (direction: 'left' | 'right') => {
-    const container = document.getElementById('projects-container');
-    if (container) container.scrollBy({ left: direction === 'left' ? -400 : 400, behavior: 'smooth' });
-  };
+  const marqueeItems = [
+    'NEST DESIGN CO',
+    'PREMIUM ARXITEKTURA',
+    'EKSTERYER & FASAD',
+    'HASHAMATLI INTERYER',
+    'TOSHKENT — 2026',
+    'NEOKLASSIK VILLALAR',
+    'LANDSHAFT SAN\'ATI',
+    'YASHASH SAN\'ATI',
+  ];
 
   return (
-    <div style={{ minHeight: '100vh', background: INK, color: PAPER, fontFamily: FONT_BODY }}>
+    <div style={{ minHeight: '100vh', background: INK, color: PAPER, fontFamily: FONT_BODY, position: 'relative' }}>
+      
+      {/* ── Subtle interactive cursor spotlight ── */}
+      <div
+        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 hidden md:block"
+        style={{
+          background: `radial-gradient(650px circle at ${mousePos.x}px ${mousePos.y}px, rgba(212, 208, 202, 0.04), transparent 60%)`,
+        }}
+      />
+
       <Navigation />
 
       {/* ══════════════════════════════════════
@@ -82,55 +121,32 @@ export default function App() {
 
         {/* Background image */}
         <div className="absolute inset-0">
-          <img
+          <motion.img
+            initial={{ scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 2, ease: 'easeOut' }}
             src="https://i.pinimg.com/736x/cd/b0/8d/cdb08db904562fdf2e0cd25f51591282.jpg"
             alt="Arxitektura"
             className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.35) contrast(1.1) grayscale(0.3)' }}
+            style={{ filter: 'brightness(0.32) contrast(1.1) grayscale(0.25)' }}
           />
           {/* Gradient veil */}
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,5,0.5) 0%, rgba(5,5,5,0.1) 40%, rgba(5,5,5,0.7) 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.15) 45%, rgba(5,5,5,0.85) 100%)' }} />
         </div>
 
-        {/* Vertical text — left */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-4"
-        >
-          <div style={{ width: 1, height: 80, background: 'linear-gradient(to bottom, transparent, var(--silver))' }} />
-          <span
-            className="rotate-90 whitespace-nowrap"
-            style={{ fontFamily: FONT_BODY, fontSize: '0.55rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--paper-dim)' }}
-          >
-            Toshkent — O'zbekiston
+        {/* Architectural coordinate markers — subtle haute couture badge */}
+        <div className="absolute top-28 left-8 md:left-16 hidden sm:flex items-center gap-3 opacity-60">
+          <span style={{ fontFamily: FONT_DISP, fontSize: '0.6rem', letterSpacing: '0.3em', color: SILVER }}>
+            [ 41.2995° N, 69.2401° E ]
           </span>
-          <div style={{ width: 1, height: 80, background: 'linear-gradient(to top, transparent, var(--silver))' }} />
-        </motion.div>
-
-        {/* Scroll indicator — right */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
-          className="absolute right-8 bottom-12 hidden lg:flex flex-col items-center gap-3"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ width: 1, height: 60, background: 'linear-gradient(to bottom, var(--silver), transparent)' }}
-          />
-          <span
-            className="-rotate-90 whitespace-nowrap"
-            style={{ fontFamily: FONT_BODY, fontSize: '0.55rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--paper-dim)' }}
-          >
-            Scroll
+          <div style={{ width: 24, height: 1, background: LINE }} />
+          <span style={{ fontFamily: FONT_BODY, fontSize: '0.55rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: DIM }}>
+            Toshkent
           </span>
-        </motion.div>
+        </div>
 
         {/* Hero content */}
-        <div className="relative z-10 max-w-[1200px] mx-auto px-8 text-center">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-8 text-center pt-16">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -138,10 +154,10 @@ export default function App() {
           >
             {/* Overline */}
             <motion.p
-              initial={{ opacity: 0, letterSpacing: '0.1em' }}
+              initial={{ opacity: 0, letterSpacing: '0.15em' }}
               animate={{ opacity: 1, letterSpacing: '0.4em' }}
-              transition={{ delay: 0.3, duration: 1 }}
-              style={{ fontFamily: FONT_BODY, fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.4em', textTransform: 'uppercase', color: SILVER, marginBottom: '2.5rem' }}
+              transition={{ delay: 0.25, duration: 1 }}
+              style={{ fontFamily: FONT_BODY, fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.4em', textTransform: 'uppercase', color: SILVER, marginBottom: '2.5rem' }}
             >
               Nest Design Co — Premium Arxitektura & Dizayn
             </motion.p>
@@ -168,20 +184,21 @@ export default function App() {
               </span>
             </motion.h1>
 
-            {/* Decorative line */}
+            {/* Decorative line with center diamond */}
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: 80 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              style={{ height: 1, background: SILVER, margin: '0 auto 2.5rem' }}
+              animate={{ width: 90 }}
+              transition={{ delay: 0.9, duration: 0.8 }}
+              className="flex items-center justify-center mx-auto mb-10"
+              style={{ height: 1, background: SILVER }}
             />
 
             {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              style={{ fontFamily: FONT_BODY, fontSize: 'clamp(0.85rem, 1.5vw, 1.05rem)', fontWeight: 300, letterSpacing: '0.06em', color: MUTED, maxWidth: 560, margin: '0 auto 3.5rem', lineHeight: 1.9 }}
+              transition={{ delay: 0.65, duration: 0.8 }}
+              style={{ fontFamily: FONT_BODY, fontSize: 'clamp(0.85rem, 1.5vw, 1.05rem)', fontWeight: 300, letterSpacing: '0.05em', color: MUTED, maxWidth: 580, margin: '0 auto 3.5rem', lineHeight: 1.9 }}
             >
               Zamonaviy arxitekturaviy yechimlar orqali hashamatli va qulay ichki makonlarni yaratamiz
             </motion.p>
@@ -190,7 +207,7 @@ export default function App() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
+              transition={{ delay: 0.95, duration: 0.8 }}
               className="flex gap-5 justify-center flex-wrap"
             >
               <Button
@@ -212,9 +229,41 @@ export default function App() {
       </section>
 
       {/* ══════════════════════════════════════
+          INFINITE RUNNING TICKER / MARQUEE
+      ══════════════════════════════════════ */}
+      <div
+        className="overflow-hidden py-4 select-none"
+        style={{
+          background: 'var(--ink-deep, #050505)',
+          borderTop: `1px solid ${LINE}`,
+          borderBottom: `1px solid ${LINE}`,
+        }}
+      >
+        <div className="animate-marquee flex items-center gap-12">
+          {[...marqueeItems, ...marqueeItems].map((item, idx) => (
+            <div key={idx} className="flex items-center gap-12 flex-shrink-0">
+              <span
+                style={{
+                  fontFamily: FONT_DISP,
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.3em',
+                  fontWeight: 500,
+                  color: idx % 2 === 0 ? PAPER : SILVER,
+                  textTransform: 'uppercase',
+                }}
+              >
+                {item}
+              </span>
+              <span style={{ color: DIM, fontSize: '0.65rem' }}>✦</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════
           STATISTICS BAR
       ══════════════════════════════════════ */}
-      <section style={{ background: INK_MID, borderTop: `1px solid ${LINE}`, borderBottom: `1px solid ${LINE}`, padding: '5rem 0' }}>
+      <section style={{ background: INK_MID, borderBottom: `1px solid ${LINE}`, padding: '5rem 0' }}>
         <div className="max-w-[1440px] mx-auto px-8 md:px-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-0 md:divide-x" style={{ '--tw-divide-opacity': 1 } as React.CSSProperties}>
             <StatCounter end={200} label="Bajarilgan Loyiha" suffix="+"  index={0} />
@@ -226,7 +275,7 @@ export default function App() {
       </section>
 
       {/* ══════════════════════════════════════
-          PROJECTS SECTION
+          PROJECTS SECTION (EDITORIAL MASONRY GRID)
       ══════════════════════════════════════ */}
       <section id="projects" style={{ padding: '7rem 0', background: INK }}>
         <div className="max-w-[1440px] mx-auto px-8 md:px-16">
@@ -237,77 +286,102 @@ export default function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-12"
+            className="mb-14"
           >
             <SectionLabel text="Portfolio" />
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <h2 style={{ fontFamily: FONT_HEAD, fontWeight: 300, fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.02em', color: PAPER }}>
-                Tanlangan loyihalar
-              </h2>
-              {/* Filter buttons */}
-              <div className="flex gap-3">
-                {(['all', 'Interyer', 'Eksteryer'] as const).map((f) => (
+              <div>
+                <h2 style={{ fontFamily: FONT_HEAD, fontWeight: 300, fontSize: 'clamp(2.2rem, 5vw, 4.2rem)', letterSpacing: '-0.02em', color: PAPER, lineHeight: 1.1 }}>
+                  Tanlangan loyihalar
+                </h2>
+                <p style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', fontWeight: 300, color: MUTED, letterSpacing: '0.04em', marginTop: 10 }}>
+                  Har bir loyiha ustida individual me'moriy yondashuv bilan ishlanadi
+                </p>
+              </div>
+
+              {/* Filter buttons with live item counters */}
+              <div className="flex gap-2.5 flex-wrap">
+                {[
+                  { key: 'all',        label: 'Barchasi',   count: projects.length },
+                  { key: 'Interyer',   label: 'Interyer',   count: projects.filter(p => p.category === 'Interyer').length },
+                  { key: 'Eksteryer',  label: 'Eksteryer',  count: projects.filter(p => p.category === 'Eksteryer').length },
+                ].map((f) => (
                   <button
-                    key={f}
-                    onClick={() => setActiveFilter(f)}
+                    key={f.key}
+                    onClick={() => setActiveFilter(f.key as any)}
                     style={{
                       fontFamily: FONT_BODY,
-                      fontSize: '0.6rem',
+                      fontSize: '0.62rem',
                       fontWeight: 600,
                       letterSpacing: '0.2em',
                       textTransform: 'uppercase',
-                      padding: '8px 18px',
-                      border: `1px solid ${activeFilter === f ? PAPER : LINE}`,
-                      color: activeFilter === f ? INK : MUTED,
-                      background: activeFilter === f ? PAPER : 'transparent',
+                      padding: '9px 20px',
+                      border: `1px solid ${activeFilter === f.key ? PAPER : LINE}`,
+                      color: activeFilter === f.key ? INK : MUTED,
+                      background: activeFilter === f.key ? PAPER : 'transparent',
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
                     }}
                   >
-                    {f === 'all' ? 'Barchasi' : f}
+                    <span>{f.label}</span>
+                    <span
+                      style={{
+                        fontFamily: FONT_DISP,
+                        fontSize: '0.55rem',
+                        opacity: activeFilter === f.key ? 0.7 : 0.5,
+                      }}
+                    >
+                      ({f.count})
+                    </span>
                   </button>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Cards scrollable row */}
-          <div className="relative">
-            <div
-              id="projects-container"
-              className="flex gap-6 overflow-x-auto pb-4"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
-              {filteredProjects.map((project, index) => (
-                <ProjectCard key={index} {...project} index={index} />
-              ))}
-            </div>
+          {/* ── Editorial Gallery Grid (All visible at once, magazine rhythm) ── */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project, index) => {
+              // Asymmetric magazine layout:
+              // When viewing all: index 0 and index 5 are wide featured cards (2 cols)
+              // When filtered: index 0 is wide featured card
+              const isFeatured = (activeFilter === 'all' && (index === 0 || index === 5)) ||
+                                 (activeFilter !== 'all' && index === 0);
 
-            {/* Navigation arrows */}
-            <div className="flex gap-3 mt-8 justify-end">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollProjects('left')}
-                className="flex items-center justify-center transition-all duration-300"
-                style={{ width: 48, height: 48, border: `1px solid ${LINE}`, color: MUTED }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLButtonElement; el.style.borderColor = SILVER; el.style.color = PAPER; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.borderColor = LINE; el.style.color = MUTED; }}
-              >
-                <ChevronLeft size={18} strokeWidth={1} />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollProjects('right')}
-                className="flex items-center justify-center transition-all duration-300"
-                style={{ width: 48, height: 48, border: `1px solid ${LINE}`, color: MUTED }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLButtonElement; el.style.borderColor = SILVER; el.style.color = PAPER; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.borderColor = LINE; el.style.color = MUTED; }}
-              >
-                <ChevronRight size={18} strokeWidth={1} />
-              </motion.button>
-            </div>
+              return (
+                <div
+                  key={`${project.title}-${index}`}
+                  className={isFeatured ? 'md:col-span-2' : 'col-span-1'}
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <ProjectCard
+                    {...project}
+                    index={index}
+                    featured={isFeatured}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Under-grid bottom note & CTA */}
+          <div
+            className="mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6"
+            style={{ borderTop: `1px solid ${LINE}` }}
+          >
+            <p style={{ fontFamily: FONT_BODY, fontSize: '0.75rem', fontWeight: 300, color: DIM, letterSpacing: '0.08em' }}>
+              KO'RILMOQDA: {filteredProjects.length} TA LOYIHA — TAFSILOTLAR UCHUN LOYIHANI BOSING
+            </p>
+            <Button
+              variant="outline"
+              icon={ArrowRight}
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              O'z loyihangizni boshlang
+            </Button>
           </div>
         </div>
       </section>
@@ -604,7 +678,7 @@ export default function App() {
                 NEST DESIGN CO
               </div>
               <div style={{ fontFamily: FONT_BODY, fontSize: '0.55rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: DIM, marginBottom: '1.5rem' }}>
-                Arxitektura & Dizayn
+                Arxitektura & Dizayn — Toshkent
               </div>
               <div style={{ width: 32, height: 1, background: LINE, marginBottom: '1.5rem' }} />
               <p style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', fontWeight: 300, color: MUTED, lineHeight: 1.8, letterSpacing: '0.02em' }}>
@@ -695,9 +769,133 @@ export default function App() {
         </div>
       </footer>
 
-      <style>{`
-        #projects-container::-webkit-scrollbar { display: none; }
-      `}</style>
+      {/* ══════════════════════════════════════
+          PROJECT LIGHTBOX MODAL (WOW-FACTOR DETAIL)
+      ══════════════════════════════════════ */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
+            style={{ background: 'rgba(5,5,5,0.92)', backdropFilter: 'blur(16px)' }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.94, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.94, y: 20 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-4xl overflow-hidden"
+              style={{ background: INK_MID, border: `1px solid ${SILVER}` }}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 z-20 flex items-center justify-center transition-colors"
+                style={{ width: 40, height: 40, background: 'rgba(5,5,5,0.8)', border: `1px solid ${LINE}`, color: PAPER }}
+              >
+                <X size={20} strokeWidth={1.2} />
+              </button>
+
+              <div className="grid md:grid-cols-2">
+                {/* Modal image */}
+                <div className="relative h-72 md:h-[500px]">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div
+                    style={{
+                      position: 'absolute', top: 16, left: 16,
+                      fontFamily: FONT_BODY, fontSize: '0.58rem', fontWeight: 600,
+                      letterSpacing: '0.25em', textTransform: 'uppercase',
+                      color: INK, background: PAPER,
+                      padding: '5px 12px',
+                    }}
+                  >
+                    {selectedProject.category}
+                  </div>
+                </div>
+
+                {/* Modal info */}
+                <div className="p-8 md:p-10 flex flex-col justify-between" style={{ background: INK }}>
+                  <div>
+                    <div style={{ fontFamily: FONT_DISP, fontSize: '0.65rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: DIM, marginBottom: 8 }}>
+                      Nest Design Co · Portfolio
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: FONT_HEAD,
+                        fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
+                        fontWeight: 400,
+                        color: PAPER,
+                        lineHeight: 1.15,
+                        marginBottom: 16,
+                      }}
+                    >
+                      {selectedProject.title}
+                    </h3>
+                    <div style={{ width: 36, height: 1, background: SILVER, marginBottom: 20 }} />
+                    <p
+                      style={{
+                        fontFamily: FONT_BODY,
+                        fontSize: '0.85rem',
+                        fontWeight: 300,
+                        lineHeight: 1.85,
+                        color: MUTED,
+                        marginBottom: 24,
+                      }}
+                    >
+                      {selectedProject.description}
+                    </p>
+
+                    {/* Metadata specs */}
+                    <div className="space-y-2.5 py-4 mb-6" style={{ borderTop: `1px solid ${LINE}`, borderBottom: `1px solid ${LINE}` }}>
+                      <div className="flex justify-between text-xs">
+                        <span style={{ color: DIM, fontFamily: FONT_BODY, letterSpacing: '0.1em' }}>Joylashuv</span>
+                        <span style={{ color: PAPER, fontFamily: FONT_BODY }}>Toshkent</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span style={{ color: DIM, fontFamily: FONT_BODY, letterSpacing: '0.1em' }}>Yo'nalish</span>
+                        <span style={{ color: PAPER, fontFamily: FONT_BODY }}>{selectedProject.category}</span>
+                      </div>
+                      <div className="flex justify-between text-xs">
+                        <span style={{ color: DIM, fontFamily: FONT_BODY, letterSpacing: '0.1em' }}>Status</span>
+                        <span style={{ color: SILVER, fontFamily: FONT_BODY }}>Muvaffaqiyatli yakunlangan</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://t.me/xusrave"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-3 w-full"
+                    style={{
+                      background: PAPER,
+                      color: INK,
+                      padding: '14px 24px',
+                      fontFamily: FONT_BODY,
+                      fontSize: '0.65rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.25em',
+                      textTransform: 'uppercase',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <span>Loyiha bo'yicha maslahat olish</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

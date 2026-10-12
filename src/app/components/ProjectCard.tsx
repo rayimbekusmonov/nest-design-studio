@@ -7,50 +7,45 @@ interface ProjectCardProps {
   category: string;
   description: string;
   index: number;
+  featured?: boolean;
 }
 
-export function ProjectCard({ image, title, category, description, index }: ProjectCardProps) {
+export function ProjectCard({ image, title, category, description, index, featured = false }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ delay: index * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ delay: index * 0.05, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative cursor-pointer flex-shrink-0"
-      style={{
-        minWidth: '380px',
-        maxWidth: '380px',
-        border: isHovered ? '1px solid rgba(212,208,202,0.4)' : '1px solid rgba(212,208,202,0.1)',
-        transition: 'border-color 0.4s ease',
-      }}
+      className="relative cursor-pointer w-full"
+      style={{ background: 'var(--ink-mid)' }}
     >
-      {/* Image */}
-      <div className="relative h-[480px] overflow-hidden">
+      {/* Image container */}
+      <div
+        className="relative overflow-hidden"
+        style={{ height: featured ? 540 : 380 }}
+      >
         <motion.img
           src={image}
           alt={title}
           className="w-full h-full object-cover"
-          animate={{ scale: isHovered ? 1.06 : 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          style={{ filter: isHovered ? 'brightness(0.55)' : 'brightness(0.75)' }}
+          animate={{ scale: isHovered ? 1.07 : 1 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          style={{ filter: isHovered ? 'brightness(0.45) contrast(1.05)' : 'brightness(0.72)' }}
         />
 
-        {/* Category tag */}
+        {/* Category badge */}
         <div
-          className="absolute top-5 left-5"
           style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '0.6rem',
-            fontWeight: 600,
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'var(--ink)',
-            background: 'var(--paper)',
-            padding: '5px 14px',
+            position: 'absolute', top: 20, left: 20,
+            fontFamily: 'var(--font-body)', fontSize: '0.58rem', fontWeight: 600,
+            letterSpacing: '0.25em', textTransform: 'uppercase',
+            color: 'var(--ink)', background: 'var(--paper)',
+            padding: '5px 13px',
           }}
         >
           {category}
@@ -58,13 +53,10 @@ export function ProjectCard({ image, title, category, description, index }: Proj
 
         {/* Index number */}
         <div
-          className="absolute top-5 right-5"
           style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '0.7rem',
-            fontWeight: 400,
-            letterSpacing: '0.1em',
-            color: 'rgba(248,245,240,0.4)',
+            position: 'absolute', top: 20, right: 20,
+            fontFamily: 'var(--font-display)', fontSize: '0.7rem',
+            color: 'rgba(248,245,240,0.3)', letterSpacing: '0.1em',
           }}
         >
           {String(index + 1).padStart(2, '0')}
@@ -72,38 +64,35 @@ export function ProjectCard({ image, title, category, description, index }: Proj
 
         {/* Hover overlay */}
         <motion.div
-          initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-          className="absolute inset-0 flex flex-col justify-end p-7"
+          transition={{ duration: 0.35 }}
+          className="absolute inset-0 flex flex-col justify-end"
           style={{
-            background: 'linear-gradient(to top, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.4) 60%, transparent 100%)',
+            padding: featured ? '2.5rem' : '1.75rem',
+            background: 'linear-gradient(to top, rgba(5,5,5,0.96) 0%, rgba(5,5,5,0.55) 55%, transparent 100%)',
           }}
         >
           <motion.div
-            animate={{ y: isHovered ? 0 : 20, opacity: isHovered ? 1 : 0 }}
-            transition={{ delay: 0.05, duration: 0.4 }}
+            animate={{ y: isHovered ? 0 : 18, opacity: isHovered ? 1 : 0 }}
+            transition={{ delay: 0.04, duration: 0.4 }}
           >
             <h3
-              className="mb-2"
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '1.5rem',
+                fontSize: featured ? '1.9rem' : '1.35rem',
                 fontWeight: 400,
                 color: 'var(--paper)',
                 letterSpacing: '-0.01em',
+                marginBottom: 10,
+                lineHeight: 1.15,
               }}
             >
               {title}
             </h3>
             <p
               style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.75rem',
-                fontWeight: 300,
-                lineHeight: 1.7,
-                color: 'var(--paper-muted)',
-                letterSpacing: '0.02em',
+                fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 300,
+                lineHeight: 1.75, color: 'var(--paper-muted)', letterSpacing: '0.02em',
               }}
             >
               {description}
@@ -114,13 +103,16 @@ export function ProjectCard({ image, title, category, description, index }: Proj
 
       {/* Bottom info bar */}
       <div
-        className="flex items-center justify-between px-5 py-4"
-        style={{ background: 'var(--ink-mid)', borderTop: '1px solid var(--accent-line)' }}
+        className="flex items-center justify-between"
+        style={{
+          padding: '14px 20px',
+          borderTop: '1px solid var(--accent-line)',
+        }}
       >
         <span
           style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: '1rem',
+            fontSize: featured ? '1.05rem' : '0.9rem',
             fontWeight: 400,
             color: 'var(--paper-muted)',
           }}
@@ -128,12 +120,12 @@ export function ProjectCard({ image, title, category, description, index }: Proj
           {title}
         </span>
         <motion.div
-          animate={{ x: isHovered ? 4 : 0 }}
+          animate={{ x: isHovered ? 5 : 0 }}
           transition={{ duration: 0.3 }}
-          style={{ color: 'var(--silver)' }}
+          style={{ color: 'var(--silver)', flexShrink: 0 }}
         >
-          <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
-            <path d="M0 5h14M10 1l4 4-4 4" stroke="currentColor" strokeWidth="0.8" />
+          <svg width="18" height="10" viewBox="0 0 18 10" fill="none">
+            <path d="M0 5h16M12 1l4 4-4 4" stroke="currentColor" strokeWidth="0.8" />
           </svg>
         </motion.div>
       </div>
