@@ -102,16 +102,6 @@ export default function App() {
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.15) 45%, rgba(5,5,5,0.85) 100%)' }} />
         </div>
 
-        {/* Architectural coordinate markers — subtle haute couture badge */}
-        <div className="absolute top-28 left-6 sm:left-8 md:left-16 hidden sm:flex items-center gap-3 opacity-60">
-          <span style={{ fontFamily: FONT_DISP, fontSize: '0.6rem', letterSpacing: '0.3em', color: SILVER }}>
-            {t.hero.coords}
-          </span>
-          <div style={{ width: 24, height: 1, background: LINE }} />
-          <span style={{ fontFamily: FONT_BODY, fontSize: '0.55rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: DIM }}>
-            {t.hero.city}
-          </span>
-        </div>
 
         {/* Hero content */}
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8 text-center pt-20">
