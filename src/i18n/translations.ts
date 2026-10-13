@@ -93,6 +93,7 @@ export interface Translations {
     emailLabel: string;
     addressLabel: string;
     addressVal: string;
+    mapLabel: string;
     socialLabel: string;
   };
   footer: {
@@ -215,7 +216,8 @@ export const translations: Record<Language, Translations> = {
       phoneLabel: 'Telefon',
       emailLabel: 'Email',
       addressLabel: 'Manzil',
-      addressVal: "Maxtumquli ko'chasi, 114A,\nYashnobod tumani,\nToshkent, 100047",
+      addressVal: "Nukus ko'chasi, 3/2,\nToshkent, O'zbekiston",
+      mapLabel: "Yandex Xaritada ochish (Sun'iy yo'ldosh)",
       socialLabel: 'Ijtimoiy tarmoqlar',
     },
     footer: {
@@ -337,7 +339,8 @@ export const translations: Record<Language, Translations> = {
       phoneLabel: 'Phone',
       emailLabel: 'Email',
       addressLabel: 'Studio Address',
-      addressVal: '114A Makhtumkuli Street,\nYashnabad District,\nTashkent, 100047',
+      addressVal: '3/2 Nukus Street,\nTashkent, Uzbekistan',
+      mapLabel: 'Open in Yandex Maps (Satellite)',
       socialLabel: 'Social Channels',
     },
     footer: {
@@ -459,7 +462,8 @@ export const translations: Record<Language, Translations> = {
       phoneLabel: 'Телефон',
       emailLabel: 'Email',
       addressLabel: 'Адрес студии',
-      addressVal: 'ул. Махтумкули, 114А,\nЯшнабадский район,\nТашкент, 100047',
+      addressVal: 'ул. Нукус, 3/2,\nТашкент, Узбекистан',
+      mapLabel: 'Открыть в Яндекс Картах (Спутник)',
       socialLabel: 'Социальные сети',
     },
     footer: {

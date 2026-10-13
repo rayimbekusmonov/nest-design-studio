@@ -564,7 +564,22 @@ export default function App() {
               {[
                 { icon: Phone, title: t.contact.phoneLabel, content: <a href="tel:+998906061903" style={{ color: MUTED, fontFamily: FONT_BODY, fontSize: '0.9rem', fontWeight: 300, transition: 'color 0.3s' }} onMouseEnter={e => (e.currentTarget.style.color = PAPER)} onMouseLeave={e => (e.currentTarget.style.color = MUTED)}>+998 90 606 19 03</a> },
                 { icon: Mail,  title: t.contact.emailLabel, content: <a href="mailto:husravbekmehmonov@gmail.com" style={{ color: MUTED, fontFamily: FONT_BODY, fontSize: '0.85rem', fontWeight: 300, transition: 'color 0.3s' }} onMouseEnter={e => (e.currentTarget.style.color = PAPER)} onMouseLeave={e => (e.currentTarget.style.color = MUTED)}>husravbekmehmonov@gmail.com</a> },
-                { icon: MapPin, title: t.contact.addressLabel, content: <p style={{ color: MUTED, fontFamily: FONT_BODY, fontSize: '0.85rem', fontWeight: 300, lineHeight: 1.7, margin: 0, whiteSpace: 'pre-line' }}>{t.contact.addressVal}</p> },
+                {
+                  icon: MapPin,
+                  title: t.contact.addressLabel,
+                  content: (
+                    <a
+                      href="https://yandex.uz/maps/-/CXuTzNo~"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: MUTED, fontFamily: FONT_BODY, fontSize: '0.85rem', fontWeight: 300, lineHeight: 1.7, margin: 0, whiteSpace: 'pre-line', display: 'block', textDecoration: 'none', transition: 'color 0.3s' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = PAPER)}
+                      onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
+                    >
+                      {t.contact.addressVal}
+                    </a>
+                  ),
+                },
               ].map(({ icon: Icon, title, content }, i) => (
                 <div
                   key={i}
@@ -612,17 +627,42 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Map */}
-              <div style={{ border: `1px solid ${LINE}`, height: 200, overflow: 'hidden' }}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.3!2d69.3588!3d41.3111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE4JzM5LjkiTiA2OcKwMjEnMzEuNyJF!5e0!3m2!1suz!2suz!4v1234567890!5m2!1suz!2suz"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: 'grayscale(100%) contrast(1.2) brightness(0.6) invert(0.9)' }}
-                  allowFullScreen
-                  loading="lazy"
-                  title="Nest Design Co manzili"
-                />
+              {/* Yandex Maps Satellite Embed */}
+              <div style={{ background: INK, border: `1px solid ${LINE}`, overflow: 'hidden' }}>
+                <div
+                  className="flex items-center justify-between px-4 py-2.5"
+                  style={{ borderBottom: `1px solid ${LINE}`, background: 'rgba(5,5,5,0.85)' }}
+                >
+                  <div className="flex items-center gap-2">
+                    <MapPin size={13} style={{ color: SILVER }} />
+                    <span style={{ fontFamily: FONT_BODY, fontSize: '0.58rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: DIM }}>
+                      Yandex Maps · Satellite
+                    </span>
+                  </div>
+                  <a
+                    href="https://yandex.uz/maps/-/CXuTzNo~"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 transition-colors"
+                    style={{ fontFamily: FONT_BODY, fontSize: '0.58rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: SILVER, textDecoration: 'none' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = PAPER)}
+                    onMouseLeave={e => (e.currentTarget.style.color = SILVER)}
+                  >
+                    <span>{t.contact.mapLabel}</span>
+                    <ExternalLink size={11} />
+                  </a>
+                </div>
+                <div style={{ height: 220, position: 'relative' }}>
+                  <iframe
+                    src="https://yandex.uz/map-widget/v1/?l=sat&ll=69.291483%2C41.298410&z=18&mode=whatshere&whatshere%5Bpoint%5D=69.291263%2C41.298056&whatshere%5Bzoom%5D=18"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    title="Nest Design Co manzili — Nukus ko'chasi, 3/2"
+                  />
+                </div>
               </div>
             </motion.div>
           </div>
@@ -687,13 +727,23 @@ export default function App() {
               </div>
               <div className="space-y-3">
                 {[
-                  { icon: Phone,  text: '+998 90 606 19 03' },
-                  { icon: Mail,   text: 'husravbekmehmonov@gmail.com' },
-                  { icon: MapPin, text: t.contact.addressVal.replace('\n', ', ').replace('\n', ', ') },
-                ].map(({ icon: Icon, text }, i) => (
+                  { icon: Phone,  text: '+998 90 606 19 03', href: 'tel:+998906061903' },
+                  { icon: Mail,   text: 'husravbekmehmonov@gmail.com', href: 'mailto:husravbekmehmonov@gmail.com' },
+                  { icon: MapPin, text: t.contact.addressVal.replace('\n', ', ').replace('\n', ', '), href: 'https://yandex.uz/maps/-/CXuTzNo~' },
+                ].map(({ icon: Icon, text, href }, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <Icon size={14} strokeWidth={1} style={{ color: SILVER, flexShrink: 0, marginTop: 3 }} />
-                    <span style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', fontWeight: 300, color: MUTED, letterSpacing: '0.02em' }}>{text}</span>
+                    <a
+                      href={href}
+                      target={href.startsWith('http') ? '_blank' : undefined}
+                      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="transition-colors duration-300"
+                      style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', fontWeight: 300, color: MUTED, letterSpacing: '0.02em', textDecoration: 'none' }}
+                      onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = PAPER)}
+                      onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = MUTED)}
+                    >
+                      {text}
+                    </a>
                   </div>
                 ))}
               </div>
