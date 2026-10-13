@@ -10,6 +10,7 @@ import { Button } from './components/Button';
 import { ServiceCard } from './components/ServiceCard';
 import { ProjectCard } from './components/ProjectCard';
 import { StatCounter } from './components/StatCounter';
+import { HeroCarousel } from './components/HeroCarousel';
 import { useLanguage } from '../i18n/LanguageContext';
 import { ProjectData } from '../i18n/translations';
 
@@ -85,108 +86,116 @@ export default function App() {
       {/* ══════════════════════════════════════
           HERO SECTION
       ══════════════════════════════════════ */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <motion.img
-            initial={{ scale: 1.08 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 2, ease: 'easeOut' }}
-            src="https://i.pinimg.com/736x/cd/b0/8d/cdb08db904562fdf2e0cd25f51591282.jpg"
-            alt="Arxitektura"
-            className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.32) contrast(1.1) grayscale(0.25)' }}
-          />
-          {/* Gradient veil */}
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.15) 45%, rgba(5,5,5,0.85) 100%)' }} />
-        </div>
-
-
-        {/* Hero content */}
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8 text-center pt-20">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            {/* Overline */}
-            <motion.p
-              initial={{ opacity: 0, letterSpacing: '0.15em' }}
-              animate={{ opacity: 1, letterSpacing: '0.4em' }}
-              transition={{ delay: 0.25, duration: 1 }}
-              style={{ fontFamily: FONT_BODY, fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.4em', textTransform: 'uppercase', color: SILVER, marginBottom: '2.5rem' }}
-            >
-              {t.hero.overline}
-            </motion.p>
-
-            {/* Main heading */}
-            <motion.h1
-              key={`hero-title-${language}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                fontFamily: FONT_BODY,
-                fontSize: 'clamp(2.1rem, 6.2vw, 5.4rem)',
-                lineHeight: 1.12,
-                textTransform: 'uppercase',
-                color: PAPER,
-                marginBottom: '1.5rem',
-              }}
-            >
-              <span style={{ fontWeight: 300, letterSpacing: '0.08em', opacity: 0.95 }}>
-                {t.hero.title1}
-              </span>
-              <br />
-              <span style={{ fontWeight: 700, letterSpacing: '0.04em', color: 'var(--paper)' }}>
-                {t.hero.title2}
-              </span>
-            </motion.h1>
-
-            {/* Decorative line */}
+      {/* ══════════════════════════════════════
+          HERO SECTION
+      ══════════════════════════════════════ */}
+      <section id="hero" className="relative min-h-screen">
+        <HeroCarousel>
+          {/* Hero content */}
+          <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8 text-center pt-32 pb-36 sm:pt-28 sm:pb-32">
             <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: 90 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex items-center justify-center mx-auto mb-10"
-              style={{ height: 1, background: SILVER }}
-            />
-
-            {/* Subtitle */}
-            <motion.p
-              key={`hero-subtitle-${language}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              style={{ fontFamily: FONT_BODY, fontSize: 'clamp(0.85rem, 1.5vw, 1.05rem)', fontWeight: 300, letterSpacing: '0.04em', color: MUTED, maxWidth: 580, margin: '0 auto 3.5rem', lineHeight: 1.9 }}
+              transition={{ duration: 0.5 }}
             >
-              {t.hero.subtitle}
-            </motion.p>
+              {/* Overline */}
+              <motion.p
+                initial={{ opacity: 0, letterSpacing: '0.15em' }}
+                animate={{ opacity: 1, letterSpacing: '0.4em' }}
+                transition={{ delay: 0.25, duration: 1 }}
+                style={{
+                  fontFamily: FONT_BODY,
+                  fontSize: '0.62rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.4em',
+                  textTransform: 'uppercase',
+                  color: 'var(--silver-bright, #E8E4DE)',
+                  marginBottom: '2rem',
+                  textShadow: '0 2px 14px rgba(0,0,0,0.85)',
+                }}
+              >
+                {t.hero.overline}
+              </motion.p>
 
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex gap-4 sm:gap-5 justify-center flex-wrap"
-            >
-              <Button
-                variant="primary"
-                icon={ArrowRight}
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              {/* Main heading */}
+              <motion.h1
+                key={`hero-title-${language}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  fontFamily: FONT_BODY,
+                  fontSize: 'clamp(2.3rem, 6.5vw, 5.5rem)',
+                  lineHeight: 1.12,
+                  textTransform: 'uppercase',
+                  color: '#FAF8F5',
+                  marginBottom: '1.5rem',
+                  textShadow: '0 4px 28px rgba(0,0,0,0.85)',
+                }}
               >
-                {t.hero.viewProjects}
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                <span style={{ fontWeight: 300, letterSpacing: '0.08em', opacity: 0.95 }}>
+                  {t.hero.title1}
+                </span>
+                <br />
+                <span style={{ fontWeight: 700, letterSpacing: '0.04em', color: '#FFFFFF' }}>
+                  {t.hero.title2}
+                </span>
+              </motion.h1>
+
+              {/* Decorative line */}
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: 90 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+                className="flex items-center justify-center mx-auto mb-8"
+                style={{ height: 1, background: 'rgba(232, 228, 222, 0.5)' }}
+              />
+
+              {/* Subtitle */}
+              <motion.p
+                key={`hero-subtitle-${language}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                style={{
+                  fontFamily: FONT_BODY,
+                  fontSize: 'clamp(0.85rem, 1.5vw, 1.05rem)',
+                  fontWeight: 300,
+                  letterSpacing: '0.04em',
+                  color: '#E0DDD8',
+                  maxWidth: 620,
+                  margin: '0 auto 3rem',
+                  lineHeight: 1.9,
+                  textShadow: '0 2px 16px rgba(0,0,0,0.85)',
+                }}
               >
-                {t.hero.contactBtn}
-              </Button>
+                {t.hero.subtitle}
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+                className="flex gap-4 sm:gap-5 justify-center flex-wrap"
+              >
+                <Button
+                  variant="primary"
+                  icon={ArrowRight}
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  {t.hero.viewProjects}
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  {t.hero.contactBtn}
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
+          </div>
+        </HeroCarousel>
       </section>
 
       {/* ══════════════════════════════════════
