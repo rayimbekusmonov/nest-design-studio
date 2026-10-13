@@ -127,18 +127,19 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                fontFamily: FONT_HEAD,
-                fontWeight: 300,
-                fontSize: 'clamp(3.3rem, 9vw, 8rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
+                fontFamily: FONT_BODY,
+                fontSize: 'clamp(2.1rem, 6.2vw, 5.4rem)',
+                lineHeight: 1.12,
+                textTransform: 'uppercase',
                 color: PAPER,
                 marginBottom: '1.5rem',
               }}
             >
-              {t.hero.title1}
+              <span style={{ fontWeight: 300, letterSpacing: '0.08em', opacity: 0.95 }}>
+                {t.hero.title1}
+              </span>
               <br />
-              <span style={{ fontStyle: 'italic', color: 'var(--silver-bright)' }}>
+              <span style={{ fontWeight: 700, letterSpacing: '0.04em', color: 'var(--paper)' }}>
                 {t.hero.title2}
               </span>
             </motion.h1>

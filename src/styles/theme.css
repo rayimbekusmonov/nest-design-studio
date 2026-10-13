@@ -55,10 +55,10 @@
   --ring:                var(--silver);
   --radius:              0;
 
-  /* ── TYPOGRAPHY ── */
   --font-display:  'Cinzel', serif;
   --font-heading:  'Cormorant Garamond', serif;
   --font-body:     'Montserrat', sans-serif;
+  --font-syne:     'Syne', sans-serif;
 }
 
 /* Inherit same tokens in dark mode */
