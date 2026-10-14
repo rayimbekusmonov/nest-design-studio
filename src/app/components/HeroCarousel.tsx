@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageContext';
 
 export interface HeroSlide {
@@ -61,7 +61,7 @@ export const HERO_SLIDES: HeroSlide[] = [
   },
 ];
 
-const AUTOPLAY_DURATION_MS = 6000;
+const AUTOPLAY_DURATION_MS = 5000;
 
 interface HeroCarouselProps {
   children?: React.ReactNode;
@@ -70,22 +70,18 @@ interface HeroCarouselProps {
 export function HeroCarousel({ children }: HeroCarouselProps) {
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [direction, setDirection] = useState<'next' | 'prev'>('next');
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const goToSlide = useCallback((index: number, dir?: 'next' | 'prev') => {
-    setDirection(dir ?? (index > currentIndex ? 'next' : 'prev'));
+  const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index);
-  }, [currentIndex]);
+  }, []);
 
   const nextSlide = useCallback(() => {
-    goToSlide((currentIndex + 1) % HERO_SLIDES.length, 'next');
-  }, [currentIndex, goToSlide]);
+    setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+  }, []);
 
   const prevSlide = useCallback(() => {
-    goToSlide((currentIndex - 1 + HERO_SLIDES.length) % HERO_SLIDES.length, 'prev');
-  }, [currentIndex, goToSlide]);
+    setCurrentIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  }, []);
 
   // Preload all 5 images on mount for instantaneous buttery transitions
   useEffect(() => {
@@ -95,16 +91,14 @@ export function HeroCarousel({ children }: HeroCarouselProps) {
     });
   }, []);
 
-  // Auto-advance timer
+  // Continuous infinite auto-advance loop — never stops at the end, cycles infinitely
   useEffect(() => {
-    if (!isPlaying) return;
-    timerRef.current = setTimeout(() => {
-      nextSlide();
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, AUTOPLAY_DURATION_MS);
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [currentIndex, isPlaying, nextSlide]);
+
+    return () => clearInterval(timer);
+  }, [currentIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -120,11 +114,7 @@ export function HeroCarousel({ children }: HeroCarouselProps) {
   const langKey = (language as 'uz' | 'en' | 'ru') || 'uz';
 
   return (
-    <div
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => setIsPlaying(true)}
-    >
+    <div className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       {/* ── Background Slides with Ken Burns motion & Crossfade ── */}
       <div className="absolute inset-0 z-0 bg-[#070709] overflow-hidden">
         <AnimatePresence initial={false} mode="sync">
@@ -135,7 +125,7 @@ export function HeroCarousel({ children }: HeroCarouselProps) {
             exit={{ opacity: 0 }}
             transition={{
               opacity: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1] },
-              scale: { duration: 7, ease: 'easeOut' },
+              scale: { duration: 6, ease: 'easeOut' },
             }}
             className="absolute inset-0 w-full h-full"
           >
@@ -259,11 +249,11 @@ export function HeroCarousel({ children }: HeroCarouselProps) {
                     >
                       {isActive && (
                         <motion.div
-                          key={`progress-${currentIndex}-${isPlaying}`}
+                          key={`progress-${currentIndex}`}
                           initial={{ width: '0%' }}
-                          animate={{ width: isPlaying ? '100%' : '100%' }}
+                          animate={{ width: '100%' }}
                           transition={{
-                            duration: isPlaying ? AUTOPLAY_DURATION_MS / 1000 : 0,
+                            duration: AUTOPLAY_DURATION_MS / 1000,
                             ease: 'linear',
                           }}
                           style={{
@@ -285,7 +275,7 @@ export function HeroCarousel({ children }: HeroCarouselProps) {
               })}
             </div>
 
-            {/* Prev / Next & Play/Pause Buttons */}
+            {/* Prev / Next Buttons (Play/Pause button removed completely) */}
             <div className="flex items-center gap-1.5 sm:gap-2">
               <button
                 onClick={prevSlide}
@@ -296,22 +286,9 @@ export function HeroCarousel({ children }: HeroCarouselProps) {
                   backdropFilter: 'blur(8px)',
                 }}
                 aria-label="Previous slide"
+                title="Oldingi slayd"
               >
                 <ChevronLeft size={14} />
-              </button>
-
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer text-white/70 hover:text-white"
-                style={{
-                  border: '1px solid rgba(255,255,255,0.18)',
-                  background: 'rgba(10,10,14,0.4)',
-                  backdropFilter: 'blur(8px)',
-                }}
-                aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
-                title={isPlaying ? 'Pause' : 'Play'}
-              >
-                {isPlaying ? <Pause size={12} /> : <Play size={12} className="ml-0.5" />}
               </button>
 
               <button
@@ -323,6 +300,7 @@ export function HeroCarousel({ children }: HeroCarouselProps) {
                   backdropFilter: 'blur(8px)',
                 }}
                 aria-label="Next slide"
+                title="Keyingi slayd"
               >
                 <ChevronRight size={14} />
               </button>
